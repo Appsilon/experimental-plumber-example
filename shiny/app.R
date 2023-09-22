@@ -128,7 +128,7 @@ server <- function(id) {
       uri_base_iframe <- paste0(uri_base, config::get("uri")$prefix)
       uri_query <- paste(names(query()), query(), sep = "=", collapse = "&")
 
-      uri <- glue::glue(uri_base, config::get("uri")$plot, "?", uri_query)
+      uri <- glue::glue(uri_base_iframe, config::get("uri")$plot, "?", uri_query)
       tagList(
         tags$iframe(
           style = "width: 100%; height: 400px; border: none",
@@ -143,20 +143,20 @@ server <- function(id) {
             ),
             tags$li(
               "Ranges outside this dashboard:",
-              tags$a(href = file.path(uri_base, "ranges"), target = "_blank", uri)
+              tags$a(href = file.path(uri_base_iframe, "ranges"), target = "_blank", uri)
             ),
             tags$li(
               "Indexes outside this dashboard:",
-              tags$a(href = file.path(uri_base, "indexes"), target = "_blank", uri)
+              tags$a(href = file.path(uri_base_iframe, "indexes"), target = "_blank", uri)
             ),
             tags$li(
-              tags$a(href = file.path(uri_base, "__docs__/"), target = "_blank", "Plumber documentation")
+              tags$a(href = file.path(uri_base_iframe, "__docs__/"), target = "_blank", "Plumber documentation")
             )
           ),
           tags$pre(
             tags$span("# Explanation of link structure:"),
             tags$span(
-              glue::glue("`{uri_base}`: link to plumber instance")
+              glue::glue("`{uri_base_iframe}`: link to plumber instance")
             ),
             tags$span(
               "`/plot`: plumber endpoint"
