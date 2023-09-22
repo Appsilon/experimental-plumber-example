@@ -129,6 +129,10 @@ server <- function(id) {
       uri_query <- paste(names(query()), query(), sep = "=", collapse = "&")
 
       uri <- glue::glue(uri_base_iframe, config::get("uri")$plot, "?", uri_query)
+      uri_ranges <- file.path(uri_base_iframe, "ranges")
+      uri_indexes <- file.path(uri_base_iframe, "indexes")
+      uri_docs <- file.path(uri_base_iframe, "__docs__/")
+
       tagList(
         tags$iframe(
           style = "width: 100%; height: 400px; border: none",
@@ -143,14 +147,14 @@ server <- function(id) {
             ),
             tags$li(
               "Ranges outside this dashboard:",
-              tags$a(href = file.path(uri_base_iframe, "ranges"), target = "_blank", uri)
+              tags$a(href = uri_ranges, target = "_blank", uri_ranges)
             ),
             tags$li(
               "Indexes outside this dashboard:",
-              tags$a(href = file.path(uri_base_iframe, "indexes"), target = "_blank", uri)
+              tags$a(href = uri_indexes, target = "_blank", uri_indexes)
             ),
             tags$li(
-              tags$a(href = file.path(uri_base_iframe, "__docs__/"), target = "_blank", "Plumber documentation")
+              tags$a(href = uri_docs, target = "_blank", "Plumber documentation")
             )
           ),
           tags$pre(
