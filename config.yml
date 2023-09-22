@@ -1,0 +1,9 @@
+default:
+  log_level: DEBUG
+  uri:
+    base: !expr if (identical("", Sys.getenv("BASE_URI"))) "http://127.0.0.1:8087" else Sys.getenv("BASE_URI")
+    plot: "/plot"
+    query: "/query"
+    ranges: "/ranges"
+    indexes: "/indexes"
+  tokens: "" # !expr Sys.getenv("SECRET_TOKENS")
