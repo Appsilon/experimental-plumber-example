@@ -36,10 +36,10 @@ ui <- function(id) {
 retrieve_metadata <- function() {
   ranges <- tryCatch({
     request(uri_base) %>%
-      req_url_path(config::get("uri")$ranges) |>
+      req_url_path(paste0(config::get("uri")$prefix, config::get("uri")$ranges)) |>
       httr2::req_headers(
         "Authorization" = glue::glue("Key {config::get('authorization')}")
-      )
+      ) |>
       req_perform() |>
       httr2::resp_body_json() |>
       purrr::pluck("result") |>
@@ -53,7 +53,10 @@ retrieve_metadata <- function() {
 
   indexes <- tryCatch({
     request(uri_base) %>%
-      req_url_path(config::get("uri")$indexes) |>
+      req_url_path(paste0(config::get("uri")$prefix, config::get("uri")$indexes)) |>
+      httr2::req_headers(
+        "Authorization" = glue::glue("Key {config::get('authorization')}")
+      ) |>
       req_perform() |>
       httr2::resp_body_json() |>
       purrr::pluck("result") |>
@@ -122,7 +125,9 @@ server <- function(id) {
     })
 
     output$iframe <- renderUI({
+      uri_base_iframe <- paste0(uri_base, config::get("uri")$prefix)
       uri_query <- paste(names(query()), query(), sep = "=", collapse = "&")
+
       uri <- glue::glue(uri_base, config::get("uri")$plot, "?", uri_query)
       tagList(
         tags$iframe(

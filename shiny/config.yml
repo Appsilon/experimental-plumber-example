@@ -2,6 +2,7 @@ default:
   log_level: DEBUG
   uri:
     base: !expr if (identical("", Sys.getenv("BASE_URI"))) "http://127.0.0.1:8087" else Sys.getenv("BASE_URI")
+    prefix: !expr if (identical("", Sys.getenv("PATH_PREFIX"))) "" else Sys.getenv("PATH_PREFIX")
     plot: "/plot"
     query: "/query"
     ranges: "/ranges"
