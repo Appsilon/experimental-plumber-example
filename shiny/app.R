@@ -37,6 +37,9 @@ retrieve_metadata <- function() {
   ranges <- tryCatch({
     request(uri_base) %>%
       req_url_path(config::get("uri")$ranges) |>
+      httr2::req_headers(
+        "Authorization" = glue::glue("Key {config::get('authorization')}")
+      )
       req_perform() |>
       httr2::resp_body_json() |>
       purrr::pluck("result") |>

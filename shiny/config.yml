@@ -6,4 +6,5 @@ default:
     query: "/query"
     ranges: "/ranges"
     indexes: "/indexes"
+  authorization: !expr Sys.getenv("AUTHORIZATION_KEY")
   tokens: "" # !expr Sys.getenv("SECRET_TOKENS")
