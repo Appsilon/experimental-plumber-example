@@ -6,18 +6,28 @@ The Plumber API implemented in this repository is a simple wrapper over the `EuS
 
 It shows the potential usages of Plumber by creating a REST api that is async _(handles multiple requests in parallel)_ and caches the results.
 
-#### Endpoints
-
-  - `/plot` :: returns HTML that can be embedded in a Web page
-  - `/query` :: returns the data that supports the plot
-  - `/ranges` :: returns metadata for the available date ranges
-  - `/indexes` :: returns metadata that provides the available indexes in the data
-
 #### Plumber technical features:
 
-- Using `{future}` to allow for async responses
-- Using `{memoise}` to allow for caching of the results
-  - re-using the results cache on following request with same parameters
+- Using `{future}` to allow for async requests;
+- Using `{memoise}` to allow for caching of the results;
+  - re-using the results cache on following request with same parameters.
+
+#### Endpoints
+
+  - `/plot` :: returns HTML that can be embedded in a Web page;
+  - `/query` :: returns the data that supports the plot;
+  - `/ranges` :: returns metadata for the available date ranges;
+  - `/indexes` :: returns metadata that provides the available indexes in the data.
+
+##### Example links
+
+Note: it needs `connect.appsilon.com` creadentials.
+
+- API documentation: https://connect.appsilon.com/plumber-example/
+- Shiny example (see below): https://connect.appsilon.com/plumber-example-shiny/
+- Sample plot: https://connect.appsilon.com/plumber-example/plot?from=1990-01-01&to=2000-01-01
+- Sample metadata _(date ranges)_: https://connect.appsilon.com/plumber-example/ranges
+
 
 #### Security
 
@@ -31,15 +41,6 @@ The example Plumber API is deployed via the Posit Connect infrastructure, which 
 Multiple instances of the Plumber API can be run behind a load balancer to provide with more capacity to a stateless service.
 
 For example, this can be achieved via a `Docker`-based solution `haproxy`.
-
-#### Example links
-
-Note: it needs `connect.appsilon.com` creadentials.
-
-API documentation: https://connect.appsilon.com/plumber-example/
-Shiny example (see below): https://connect.appsilon.com/plumber-example-shiny/
-Sample plot: https://connect.appsilon.com/plumber-example/plot?from=1990-01-01&to=2000-01-01
-Sample metadata _(date ranges)_: https://connect.appsilon.com/plumber-example/ranges
 
 #### Shiny _(paired with Plumber)_
 
