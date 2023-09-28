@@ -17,3 +17,5 @@ library(logger)
 library(future)
 
 library(echarts4r)
+
+library(memoise)

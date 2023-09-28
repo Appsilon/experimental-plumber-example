@@ -3,6 +3,7 @@ box::use(
   glue[glue],
   logger[log_info, log_debug, log_error],
   promises[future_promise],
+  memoise[memoise],
 )
 
 box::use(
@@ -10,6 +11,11 @@ box::use(
   api/handler/render[render],
   api/logic/token[validate_token],
 )
+
+query_m <- memoise(query)
+render_m <- memoise(render)
+ranges_m <- memoise(ranges)
+indexes_m <- memoise(indexes)
 
 response_403 <- function(res) {
   res$status <- 403
@@ -44,7 +50,8 @@ function(req, res, token = "") {
   }
 
   future_promise(
-    ranges()
+    ranges_m(),
+    globals = FALSE
   )
 }
 
@@ -59,7 +66,8 @@ function(req, res, token = "") {
   }
 
   future_promise(
-    indexes()
+    indexes_m(),
+    globals = FALSE
   )
 }
 
@@ -79,7 +87,8 @@ function(req, res, from = "", to = "", index = "", token = "") {
   }
 
   future_promise(
-    query(from, to, index)
+    query_m(from, to, index),
+    globals = FALSE
   )
 }
 
@@ -100,6 +109,7 @@ function(req, res, from = "", to = "", index = "", token = "") {
   }
 
   future_promise(
-    render(from, to, index)
+    render_m(from, to, index),
+    globals = FALSE
   )
 }
