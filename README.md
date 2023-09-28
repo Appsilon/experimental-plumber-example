@@ -43,12 +43,16 @@ Sample metadata _(date ranges)_: https://connect.appsilon.com/plumber-example/ra
 
 #### Shiny _(paired with Plumber)_
 
-The Shiny application 
+Shiny _(or any other web application)_ can be paired with Plumber to render plots or perform complex data-manipulations.
+
+As an add-on to the plumber example we implement a web application that uses the API for all it's data and plotting needs.
 
 - Calls Plumber API to retrieve metadata
 - Plot is rendered by the browser (bypassing Shiny server)
   - Using an `iframe` HTML element _(browser calls on Plumber API endpoint and renders it)_
   - Shiny process is not blocked by the rendering of the plot
+
+A diagram of the communication happening once the page is loaded _(and everytime the parameters are modified)_:
 
 ```mermaid
 sequenceDiagram;
