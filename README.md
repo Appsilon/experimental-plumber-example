@@ -11,6 +11,22 @@ Using plumber API to handle queries for:
 - Data
 - Plot rendering
 
+```mermaid
+sequenceDiagram;
+    autonumber
+    participant Browser
+    participant Shiny
+    participant Plumber API
+    Browser->>Shiny: Open App
+    Shiny->>Plumber API: Get metadata
+    Plumber API-->>Shiny: Return metadata
+    Note over Plumber API,Shiny: Available<br/>"Date ranges" & "Indexes"
+    Shiny-->>Browser: Render App
+    Note over Shiny,Browser: Input slider &<br/>Parameters for plot (iframe)
+    Browser-)Plumber API: GET iframe contents
+    Plumber API--)Browser: Render Plot
+```
+
 #### Plumber technical features:
 
 - Using `{future}` to allow for async responses
